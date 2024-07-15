@@ -16,7 +16,7 @@ python portblitz.py ip_address
 ### Requirements
 * Python: Version 3.x
 * python-nmap: A Python library that allows interaction with Nmap
-* Nmap: The Nmap tool must be installed on your system from [official Nmap website](nmap.org)
+* Nmap: The Nmap tool must be installed on your system from [official Nmap website](https://nmap.org)
 
 Run the following command to install the dependencies:
 ```
