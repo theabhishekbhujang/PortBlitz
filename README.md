@@ -1,6 +1,6 @@
 # PortBlitz
-PortBlitz is a sleek and efficient port scanning script designed to quickly identify open ports on a target IP address. Utilizing the powerful Nmap library, PortBlitz scans a predefined set of common ports, providing immediate feedback on their status.
 
+PortBlitz is a powerful and versatile port scanning script designed to provide comprehensive information about open ports, services, and operating systems on target hosts. Utilizing the robust Nmap library, PortBlitz supports custom and full-range port scans, service detection, OS identification, verbose output, results saving (JSON/CSV), multiple targets, banner grabbing, timing templates, and DNS resolution.
 ### Features
 
 * Scan Specific Ports: Scan a list of user-specified ports.
