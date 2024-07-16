@@ -3,14 +3,38 @@ PortBlitz is a sleek and efficient port scanning script designed to quickly iden
 
 ### Features
 
-* Scans common ports: 21 (FTP), 22 (SSH), 80 (HTTP), 139 (NetBIOS), 443 (HTTPS), 8080 (HTTP Alternative)
-* Outputs port status and overall host state
-* Simple to use: Just provide the target IP address as a command-line argument
-* Built on Nmap: Leveraging the capabilities of the Nmap library, PortBlitz ensures reliable and accurate port scanning.
+* Scan Specific Ports: Scan a list of user-specified ports.
+* Scan All Ports: Option to scan all ports (0-65535).
+* Service Detection: Identify services running on open ports.
+* Operating System Detection: Detect the operating system of the target host.
+* Verbose Output: Provide detailed output for each scan.
+* Output to File: Save results to a file in JSON or CSV format.
+* Multiple Target Support: Scan multiple targets simultaneously.
+* Banner Grabbing: Retrieve banners from open ports.
+* Timing Templates: Choose different timing templates for faster or more stealthy scans.
+* DNS Resolution: Resolve hostnames to IP addresses.
 
 ### Usage
 ```
-python portblitz.py ip_address
+PortBlitz.py [-h] [-p PORTS [PORTS ...]] [-a] [-s] [-o] [-v] [-f OUTPUT_FILE] [-t {0,1,2,3,4,5}] target [target ...]
+
+
+positional arguments:
+  target                Target IP address(es) or hostname(s) to scan
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PORTS [PORTS ...], --ports PORTS [PORTS ...]
+                        List of ports to scan (e.g., 21 22 80)
+  -a, --all-ports       Scan all ports (0-65535)
+  -s, --services        Detect services on open ports
+  -o, --os              Detect operating system
+  -v, --verbose         Verbose output
+  -f OUTPUT_FILE, --output-file OUTPUT_FILE
+                        Save results to a file (JSON or CSV)
+  -t {0,1,2,3,4,5}, --timing {0,1,2,3,4,5}
+                        Timing template (0-5)
+
 ```
 
 ### Requirements
