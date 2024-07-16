@@ -16,7 +16,7 @@ PortBlitz is a powerful and versatile port scanning script designed to provide c
 
 ### Usage
 ```
-PortBlitz.py [-h] [-p PORTS [PORTS ...]] [-a] [-s] [-o] [-v] [-f OUTPUT_FILE] [-t {0,1,2,3,4,5}] target [target ...]
+PortBlitz.py [-h] [-p PORTS [PORTS ...]][-a] [-s] [-o] [-v] [-f OUTPUT_FILE] [-t {0,1,2,3,4,5}] target[target ...]
 
 
 positional arguments:
