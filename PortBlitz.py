@@ -38,6 +38,23 @@ def save_results(results, filename):
             for port in result['ports']:
                 f.write(f"Port {port['port']} is {port['state']}\n")
 
+
+def build_scan_args(services, os_detect, timing_template):
+    """Construct the nmap scan argument string from flags."""
+    args = f"-T{timing_template}"
+    if services:
+        args += ' -sV'
+    if os_detect:
+        args += ' -O'
+    return args
+
+def determine_ports_range(all_ports, ports):
+    """Return port range string based on flags and provided ports."""
+    if all_ports:
+        return '0-65535'
+    return ','.join(ports) if ports else '1-1024'
+
+
 def main():
     args = parse_arguments()
     targets = args.target
@@ -105,3 +122,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
