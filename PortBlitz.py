@@ -54,6 +54,10 @@ def determine_ports_range(all_ports, ports):
         return '0-65535'
     return ','.join(ports) if ports else '1-1024'
 
+def is_port_open(port_entry):
+    """Return True if a parsed port entry indicates an open port."""
+    state = str(port_entry.get('state', '')).lower()
+    return state == 'open'
 
 def main():
     args = parse_arguments()
@@ -122,4 +126,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
