@@ -59,6 +59,60 @@ def is_port_open(port_entry):
     state = str(port_entry.get('state', '')).lower()
     return state == 'open'
 
+def generate_scan_summary(results):
+    """Generate a comprehensive summary of scan results with statistics."""
+    total_hosts = len(results)
+    total_ports_scanned = 0
+    open_ports_count = 0
+    closed_ports_count = 0
+    filtered_ports_count = 0
+    
+    summary_lines = []
+    summary_lines.append("\n" + "="*60)
+    summary_lines.append("SCAN SUMMARY REPORT")
+    summary_lines.append("="*60)
+    
+    for result in results:
+        host_ports = len(result['ports'])
+        total_ports_scanned += host_ports
+        
+        host_open = 0
+        host_closed = 0
+        host_filtered = 0
+        
+        for port in result['ports']:
+            if port['state'] == 'open':
+                open_ports_count += 1
+                host_open += 1
+            elif port['state'] == 'closed':
+                closed_ports_count += 1
+                host_closed += 1
+            elif port['state'] == 'filtered':
+                filtered_ports_count += 1
+                host_filtered += 1
+        
+        summary_lines.append(f"\nHost: {result['host']} ({result['status']})")
+        summary_lines.append(f"  Total ports scanned: {host_ports}")
+        summary_lines.append(f"  Open ports: {host_open}")
+        summary_lines.append(f"  Closed ports: {host_closed}")
+        summary_lines.append(f"  Filtered ports: {host_filtered}")
+    
+    summary_lines.append(f"\nOVERALL STATISTICS:")
+    summary_lines.append(f"  Total hosts scanned: {total_hosts}")
+    summary_lines.append(f"  Total ports scanned: {total_ports_scanned}")
+    summary_lines.append(f"  Open ports found: {open_ports_count}")
+    summary_lines.append(f"  Closed ports: {closed_ports_count}")
+    summary_lines.append(f"  Filtered ports: {filtered_ports_count}")
+    
+    if total_ports_scanned > 0:
+        open_percentage = (open_ports_count / total_ports_scanned) * 100
+        summary_lines.append(f"  Open port percentage: {open_percentage:.2f}%")
+    
+    summary_lines.append("="*60)
+    
+    return "\n".join(summary_lines)
+
+
 def main():
     args = parse_arguments()
     targets = args.target
@@ -126,5 +180,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
