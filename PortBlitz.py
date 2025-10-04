@@ -173,13 +173,15 @@ def main():
         print(f"\nHost {result['host']} is {result['status']}\n")
         for port in result['ports']:
             print(f"Port {port['port']} is {port['state']}")
-
+    if results:
+        print(generate_scan_summary(results))
     # Save results to a file
     if output_file:
         save_results(results, output_file)
 
 if __name__ == "__main__":
     main()
+
 
 
 
