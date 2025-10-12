@@ -26,10 +26,20 @@ def parse_arguments():
     return parser.parse_args()
 
 def resolve_hostname(target):
+    if validate_ip(target):
+        return target
     try:
         return socket.gethostbyname(target)
     except socket.error:
         return target
+
+def validate_ip(ip_string):
+    """Validate if a string is a valid IPv4 address."""
+    try:
+        parts = ip_string.split('.')
+        return len(parts) == 4 and all(0 <= int(part) <= 255 for part in parts)
+    except (AttributeError, ValueError):
+        return False
 
 def save_results(results, filename):
     with open(filename, 'w') as f:
@@ -190,6 +200,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
