@@ -180,6 +180,16 @@ def generate_scan_summary(results):
 def main():
     args = parse_arguments()
     
+    # Initialize variables first
+    ports = args.ports if not args.all_ports else None  # Added None to indicate all ports
+    services = args.services
+    os_detect = args.os
+    verbose = args.verbose
+    output_file = args.output_file
+    timing_template = args.timing
+    udp_scan = args.udp
+    ipv6_enabled = args.ipv6
+    
     # Handle target input from file or command line
     targets = []
     if args.input_file:
@@ -207,15 +217,6 @@ def main():
             expanded_targets.append(target)
     
     targets = expanded_targets
-    
-    ports = args.ports if not args.all_ports else None  # Added None to indicate all ports
-    services = args.services
-    os_detect = args.os
-    verbose = args.verbose
-    output_file = args.output_file
-    timing_template = args.timing
-    udp_scan = args.udp
-    ipv6_enabled = args.ipv6
 
     scan_v = nmap.PortScanner()
     results = []
