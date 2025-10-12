@@ -59,6 +59,12 @@ def is_port_open(port_entry):
     state = str(port_entry.get('state', '')).lower()
     return state == 'open'
 
+def format_port_output(port, service=None):
+    """Format port information for display."""
+    if service and service != 'unknown':
+        return f"Port {port} is open - Service: {service}"
+    return f"Port {port} is open"
+
 def generate_scan_summary(results):
     """Generate a comprehensive summary of scan results with statistics."""
     total_hosts = len(results)
@@ -156,7 +162,7 @@ def main():
                     for port in portscan['scan'][host]['tcp']:
                         state = portscan['scan'][host]['tcp'][port]['state']
                         service_info = portscan['scan'][host]['tcp'][port].get('name', 'unknown') if services else 'unknown'
-                        result['ports'].append({'port': port, 'state': state})
+                        result['ports'].append({'port': port, 'state': state, 'service': service_info})
 
                 results.append(result)
 
@@ -172,6 +178,9 @@ def main():
     for result in results:
         print(f"\nHost {result['host']} is {result['status']}\n")
         for port in result['ports']:
+          if port['state'] == 'open':
+            print(format_port_output(port['port'], port.get('service')))
+          else:
             print(f"Port {port['port']} is {port['state']}")
     if results:
         print(generate_scan_summary(results))
@@ -181,6 +190,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
